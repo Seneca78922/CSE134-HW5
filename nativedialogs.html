@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q7NF61LXYF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-Q7NF61LXYF');
+    </script>
+    <meta charset="utf-8">
+    <title>Native Dialog Buttons</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <script type="text/javascript" src="./purify.min.js"></script>
+    <script type="text/javascript" src="./purify.min.js.map"></script>
+
+</head>
+
+<body>
+    <h1>Simple Dialogs</h1>
+    <hr />
+    <button id="Alert">Alert</button>
+    <button id="Confirm">Confirm</button>
+    <button id="Prompt">Prompt</button>
+    <button id="SaferPrompt">Safer Prompt</button>
+    <hr />
+    <output name="confirmResponse" for="Confirm" id="confirmOutput"></output>
+    <output name="promptResponse" for="Prompt" id="promptOutput"></output>
+    <script>
+        function clearOutput() {
+            let confirmOutput = document.getElementById('confirmOutput');
+            confirmOutput.innerHTML = "";
+            let promptOutput = document.getElementById('promptOutput');
+            promptOutput.innerHTML = "";
+        }
+        confirmTest = function () {
+            setTimeout(clearOutput, 0);
+
+            setTimeout(() => {
+                response = confirm("Are you confirming?");
+                confirmOutput = document.getElementById('confirmOutput');
+                confirmOutput.innerHTML = `The value returned by the confirm method is: (${response})`;
+            }, 20);
+
+        }
+        promptTest = function () {
+            setTimeout(clearOutput, 0);
+
+            setTimeout(() => {
+                response = prompt("Are you happy?");
+                promptOutput = document.getElementById('promptOutput');
+                if (response === null) {
+                    promptOutput.innerHTML = "User didn't enter anything";
+                }
+                else {
+                    promptOutput.innerHTML = `The value returned by the prompt method is: (${response})`;
+                }
+            }, 20); //This timeout is what worked for me to clear output first, not sure about other browsers
+        }
+        saferPromptTest = function () {
+            setTimeout(clearOutput, 0);
+
+            setTimeout(() => {
+                responseDirty = prompt("Are you happy?");
+                let cleanResponse = DOMPurify.sanitize(responseDirty);
+                let saferPromptOutput = document.getElementById('promptOutput');
+                if (responseDirty === null) {//just in case user presses cancel and response is null
+                    saferPromptOutput.innerHTML = "User didn't enter anything";
+                }
+                else {
+                    saferPromptOutput.innerHTML = `The value returned by the prompt method is: (${cleanResponse})`;
+                }
+            }, 20);
+        }
+        alertTest = function () {
+            setTimeout(clearOutput, 0);
+            setTimeout(
+                () => { alert('Alert'); }, 20);
+        }
+
+
+        window.addEventListener('DOMContentLoaded', function () {
+            let buttonAlert = document.getElementById('Alert');
+            buttonAlert.addEventListener('click', alertTest);
+        });
+        window.addEventListener('DOMContentLoaded', function () {
+
+            let buttonConfirm = document.getElementById('Confirm');
+            buttonConfirm.addEventListener('click', confirmTest);
+        });
+        window.addEventListener('DOMContentLoaded', function () {
+
+            let buttonPrompt = document.getElementById('Prompt');
+            buttonPrompt.addEventListener('click', promptTest, true);
+        });
+        window.addEventListener('DOMContentLoaded', function () {
+            let buttonSaferPrompt = document.getElementById('SaferPrompt');
+            buttonSaferPrompt.addEventListener('click', saferPromptTest, true);
+        });
+
+
+    </script>
+</body>
+
+</html>
