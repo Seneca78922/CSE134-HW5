@@ -1,11 +1,17 @@
 
-
+setInterval(updateDate,1000);
 export function initBtnListeners() {
+    
+    
     document.getElementById('postBtn').addEventListener('click',postBtnEvent);
     document.getElementById('getBtn').addEventListener('click',getBtnEvent);
     document.getElementById('putBtn').addEventListener('click',putBtnEvent);
     document.getElementById('deleteBtn').addEventListener('click',deleteBtnEvent);
 
+}
+export function updateDate() {
+  let date = document.getElementById("date_time");
+  date.value = new Date();
 }
 /*each button will set the method and action of the form, submit the form, grab the JSON response data and convert it to html*/
   //data from endpoint is JSON response to be parsed into string, put into output tag with id value of response

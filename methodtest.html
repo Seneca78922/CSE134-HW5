@@ -18,7 +18,7 @@
         <label for="article_body">article_body:</label><br/>
         <textarea type="text" name = "article_body" id="article_body" ></textarea> <br/>
         <label for="date_time">date and time of submission</label> <!--want to populte when javascript call to new Date() is made, needs to be time too-->
-        <input type="text" name = "date_time" id="date_time" value="placeholder" readonly/><br/> <!--default is current time, type is date-->
+        <input type="text" name = "date_time" id="date_time" value="" readonly/><br/> <!--default is current time, type is date-->
         <button name="postBtn" id="postBtn" type="button">postBtn</button>
         <button name="getBtn" id="getBtn" type="button">getBtn</button>
         <button name="putBtn" id="putBtn" type="button">putBtn</button>
@@ -29,7 +29,7 @@
 
     <script type="module">
         import * as btnMethod from "./methodtest.js";
-        
+        window.addEventListener("load",btnMethod.updateDate);
          //when dom loads, intialize the blog posts by looping through prepopulated array
         window.addEventListener("DOMContentLoaded", btnMethod.initBtnListeners);
     
