@@ -10,17 +10,17 @@
 </head>
 <body>
     <!--some inputs may not make sense for some form methods, can change-->
-    <form action = "" method=""> <!--form method and action determined by type of button-->
+    <form id="form"> <!--form method and action determined by type of button-->
         <label for="id">id:</label> 
-        <input type="number" id="id" required /> <br/>
+        <input type="number" name="id" id="id"  /> <br/>
         <label for="article_name">article_name:</label>
-        <input type="text" id="article_name" required /> <br/>
+        <input type="text" name = "article_name" id="article_name"  /> <br/>
         <label for="article_body">article_body:</label><br/>
-        <textarea type="text" id="article_body" required></textarea> <br/>
+        <textarea type="text" name = "article_body" id="article_body" ></textarea> <br/>
         <label for="date_time">date and time of submission</label> <!--want to populte when javascript call to new Date() is made, needs to be time too-->
-        <input type="date" id="date_time" value="placeholder" readonly/><br/>
+        <input type="date" name = "date_time" id="date_time" value="placeholder" readonly/><br/>
         <button name="postBtn" id="postBtn" type="submit">postBtn</button>
-        <button name="getBtn" id="getBtn" type="submit">getBtn</button>
+        <button name="getBtn" id="getBtn">getBtn</button>
         <button name="putBtn" id="putBtn" type="submit">putBtn</button>
         <button name="deleteBtn" id="deleteBtn" type="submit">deleteBtn</button>
         <output name="response" id="response"></output> <!--have to format result to be readable-->
@@ -30,7 +30,7 @@
         import * as btnMethod from "./methodtest.js";
     
          //when dom loads, intialize the blog posts by looping through prepopulated array
-        window.addEventListener("DOMContentLoaded", btnMethod.initFormMethods);
+        window.addEventListener("DOMContentLoaded", btnMethod.initBtnListeners);
              
     
     
